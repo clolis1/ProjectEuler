@@ -1,0 +1,19 @@
+/=========\
+|Problem 7|
+\=========/
+
+By listing the first six prime numbers: 2, 3, 5, 7, 11, and 13, we can see that the 6th prime is 13.
+
+What is the 10 001st prime number?
+
+/===========\
+|Explanation|
+\===========/
+
+We can determine if a number is prime by seeing if it is divisible by all numbers up until its square root.
+
+If a number is not divisible by any number iteratively up until that point, it is prime.
+This is because the square root is a factor that is paired with itself;
+Every other number between 1 and the square root is paired with a number between the square root and half the number we are testing.
+
+Thus, the 10,001st prime number is 104743.

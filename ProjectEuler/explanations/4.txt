@@ -1,0 +1,28 @@
+/=========\
+|Problem 4|
+\=========/
+
+A palindromic number reads the same both ways. The largest palindrome made from the product of two 2-digit numbers is 9009 = 91 × 99.
+
+Find the largest palindrome made from the product of two 3-digit numbers.
+
+/===========\
+|Explanation|
+\===========/
+
+The answer to the problem we are looking for is the largest number shared between the following two sets:
+	1. The set of palindromes
+	2. The set of products of two 3-digit numbers
+
+Generating the sets of largest palindromes and largest products is trivial.
+However, it is unnecessary to generate the entirety of these sets to find our answer.
+We can discover numbers that meet the criteria of both sets, and then forgo generating new products that will certainly not be larger.
+
+This is solved by using a nested for-loop where each loop iterates consecutively on each number in the pair.
+If, while descending, a number-pair is found to have a product less than the current largest known palindrome,
+it is proven that any further products would also fail to be larger, so the loop ends.
+
+Eventually, this process will conclude when the first number in the pair multipled by 999 (the greatest 3-digit integer),
+is found to be less than the largest known palindrome (which becomes the largest definitive palindrome).
+
+This number is 906609.

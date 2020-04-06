@@ -1,0 +1,10 @@
+﻿/=====================\
+|Problem 1 Explanation|
+\=====================/
+
+This problem calls for the sum of a set of numbers as its solution.
+In this instance, the set which must be summed may be defined as:
+
+S={x|x[element_of][set_of_whole_numbers], x<1000, x%3=0, x%5=0}
+
+The sum of all numbers x in set S is 233168.

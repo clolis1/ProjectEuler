@@ -1,0 +1,20 @@
+/=========\
+|Problem 5|
+\=========/
+
+2520 is the smallest number that can be divided by each of the numbers from 1 to 10 without any remainder.
+
+What is the smallest positive number that is evenly divisible by all of the numbers from 1 to 20?
+
+/===========\
+|Explanation|
+\===========/
+
+In order to be evenly divisible by a number, the number being divided must contain all the prime factors of the divisor in its set of prime factors.
+To be evenly divisible by a set of numbers, the dividend must share at least all the prime factors from the sets of each number it is evenly disivisble by.
+
+In this case, the number we are looking for must contain a set of prime factors that minimally satisfies each set of the numbers 1-20.
+We can do this by discovering the prime factors of each number 1-20.
+We can then create a shared set that includes the minimum number of prime factors to satisfy each of the numbers individually.
+
+Our answer is the product of all of these prime numbers: 232792560

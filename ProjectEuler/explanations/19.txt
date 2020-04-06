@@ -1,0 +1,32 @@
+/==========\
+|Problem 19|
+\==========/
+
+You are given the following information, but you may prefer to do some research for yourself.
+
+1 Jan 1900 was a Monday.
+Thirty days has September,
+April, June and November.
+All the rest have thirty-one,
+Saving February alone,
+Which has twenty-eight, rain or shine.
+And on leap years, twenty-nine.
+A leap year occurs on any year evenly divisible by 4, but not on a century unless it is divisible by 400.
+How many Sundays fell on the first of the month during the twentieth century (1 Jan 1901 to 31 Dec 2000)?
+
+/===========\
+|Explanation|
+\===========/
+
+This problem can be solved trivially by performing some arithmetic calculation beforehand.
+
+Additionally, this solution might be extrapolated to calendars with any variable number of months, days in a month, week's length, etc.
+
+Without considering leap-years, every year will have a set amount of Sundays landing on the first day of a month.
+We can determine the amount of Sundays in a year by checking what day the first day of the year is, leaving just 7 possibilities per year.
+For leap years, there are seven more possibilities to consider.
+
+We know which years will be leap years, and we know how many days are in both regular years, and leap years, so it is trivial to determine
+what day starts a year if we work iteratively.
+
+By iterating from 1901 to 2000, we can add up the sums of all months that start with a Sunday for our answer.

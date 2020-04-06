@@ -1,0 +1,37 @@
+/=========\
+|Problem 9|
+\=========/
+
+A Pythagorean triplet is a set of three natural numbers, a < b < c, for which,
+
+				a^2 + b^2 = c^2
+
+For example, 3^2 + 4^2 = 9 + 16 = 25 = 5^2.
+
+There exists exactly one Pythagorean triplet for which a + b + c = 1000.
+Find the product abc.
+
+/===========\
+|Explanation|
+\===========/
+
+In this problem, we need to find a set of natural numbers that satisfies both equations, a + b + c = 1000 and a^2 + b^2 = c^2.
+
+There are countless combinations of numbers that would satisfy the first equation, so it's more prudent to find combinations that satisfy the second.
+In other words, it's easier to find Pyhtagorean triples.
+
+There exists a method of determining all primitive Pythagorean triples using two underlying parameters (with set restrictions) and a specific set of equations:
+
+a = uv
+b = (u^2 - v^2)/2
+c = (u^2 + v^2)/2
+
+where u > v > 0, and u, v are both odd and relatively prime.
+
+We can iterate through pairs of u and v to generate primitive triples where a + b + c <= 1000.
+We can also multiply the triplets of a,b,c by natural numbers to generate more Pythagorean triples.
+
+By combing throgh all of these generated triples, we can find a set that satisfies the conditions of the problem.
+Then we can solve for abc.
+
+abc is 31875000.

@@ -1,0 +1,14 @@
+/=====================\
+|Problem 3 Explanation|
+\=====================/
+
+This problem calls for the greatest prime factor of a number as its solution.
+
+We obtain this number by performing the modulo operation on the given value with all values, using an iterator starting with 2.
+If our target number is found to be divisible by our iterator, that number is a prime factor.
+The quotient of our target number divided by the iterator is stored every time a suitable divisor is found.
+
+If our iterator is ever larger than the square root of our remaining value, we have completed the algorithm.
+The list of prime factors will be all the divisors as well as the final quotient value.
+
+In this case, the largest prime factor is 6857.

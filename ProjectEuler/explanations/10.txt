@@ -1,0 +1,23 @@
+/==========\
+|Problem 10|
+\==========/
+
+The sum of the primes below 10 is 2 + 3 + 5 + 7 = 17.
+
+Find the sum of all the primes below two million.
+
+/===========\
+|Explanation|
+\===========/
+
+**NOTE: Explanation partly copied from Problem 7**
+
+We can determine if a number is prime by seeing if it is divisible by all numbers up until its square root.
+
+If a number is not divisible by any number iteratively up until that point, it is prime.
+This is because the square root is a factor that is paired with itself;
+Every other number between 1 and the square root is paired with a number between the square root and half the number we are testing.
+
+We can simply add together all prime numbers up until this point.
+
+The sum of all prime numbers whose values are individually less than 2,000,000 is 142,913,828,922.
