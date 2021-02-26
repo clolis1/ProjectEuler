@@ -20,4 +20,4 @@ So our permutation equation will look like: 40!/(20!)(20!)
 
 Because there are 40 spaces and two sets of distinct objects numbered at 20 each
 
-Ultimately, there are 137846528820 distinct paths to take.
+Ultimately, there are 137846528820 distinct paths to take.

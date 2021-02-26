@@ -197,13 +197,7 @@ public class ComplexMath {
         
         AtomicReference<Boolean> relPrime = new AtomicReference<Boolean>(false);
         xFactors.forEach((key, val) -> {if (yFactors.containsKey(key)) relPrime.set(true);});
-/**        for (int i = 0; i < xFactors.size(); i++) {
-            if (yFactors.contains(xFactors.get(i))) {
-                relPrime = false;
-                break;
-            }
-        }
-*/        
+ 
         return relPrime.get();
     }
     
@@ -233,22 +227,37 @@ public class ComplexMath {
         }
         return false;
     }
-/**    
+    
     public static ArrayList<Integer> getDivisors(int n) {
-        ArrayList<Double> temp = ComplexMath.getPrimeFactors(n);
+        double d = n;
         ArrayList<Integer> divisors = new ArrayList<Integer>();
+        double square_root = Math.floor(Math.sqrt(d));
+        for (int i = 1; i <= square_root; i++) {
+            if (d % i == 0) {
+                divisors.add(i);
+                divisors.add((int) d / i);
+            }
+        }
+        if (ComplexMath.isSquare(d) && d != 0) {
+            divisors.remove(divisors.size() - 1);
+        }
+
+/**
+        HashMap<Integer, Integer> temp = ComplexMath.getPrimeFactors(n);
         
         
         
         // Use list of prime factors to determine divisors.
         
+
+       
         for (int i = 1; i < temp.size() / 2; i++) {
             temp.forEach((e) -> ;
         }
-        
+*/
         return divisors;
     }
-*/  
+  
     public static BigInteger bigFactorial(int n) {
         if (n > 1) return (new BigInteger(Integer.toString(n))).multiply(bigFactorial(n-1));
         else return new BigInteger("1");

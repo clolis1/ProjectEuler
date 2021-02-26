@@ -1,0 +1,32 @@
+/==========\
+|Problem 21|
+\==========/
+
+Let d(n) be defined as the sum of proper divisors of n (numbers less than n which divide evenly into n).
+If d(a) = b and d(b) = a, where a ≠ b, then a and b are an amicable pair and each of a and b are called amicable numbers.
+
+For example, the proper divisors of 220 are 1, 2, 4, 5, 10, 11, 20, 22, 44, 55 and 110; therefore d(220) = 284.
+The proper divisors of 284 are 1, 2, 4, 71 and 142; so d(284) = 220.
+
+Evaluate the sum of all the amicable numbers under 10000.
+
+/===========\
+|Explanation|
+\===========/
+
+For this problem, I began by determing the sum of proper divisors for each number between 0 and 10000 (non-inclusive).
+I did this by counting up to the square root of each number and determining if a given number was a possible divisor (by using the modulus function).
+
+There is room for improvment in this section- for very large numbers, it would be faster to determine all the prime factors of a number
+and use those numbers to generate a list of proper divisors.
+
+A list of numbers along with their proper-divisor-sums is tabulated until the limit of 10000 is reached.
+At this point, the list is iterated through-- every number has its proper-divisor-sum compared with its corresponding pair.
+Discovered amicable pairs are added to the sum total.
+
+There is room for imrpovement in this section.
+It is possible to save one iteration through the list by calculating the sum while forming the initial list.
+This would involve investigating the proper-divisor-sum's corresponding key-value out of turn during the development of the list.
+As long as the original location is remembered, this out-of-turn exploration will remove the need for a second run-through of the list.
+
+The sum of all amicable numbers between 0 and 10000 (non-inclusive) is 31626.

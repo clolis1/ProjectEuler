@@ -31,6 +31,7 @@ public class ProblemSet {
         probs.add(new P18());
         probs.add(new P19());
         probs.add(new P20());
+        probs.add(new P21());
     }
     
     // Returns the associated Problem from the array

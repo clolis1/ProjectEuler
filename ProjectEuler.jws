@@ -9,7 +9,6 @@
       <string v="oracle.jdeveloper.model.PathsConfiguration/ApplicationBuildToolContentSet"/>
    </list>
    <list n="listOfChildren">
-      <hash><url n="URL" path="../HackerRank/HackerRank.jpr"/></hash>
       <hash><url n="URL" path="ProjectEuler/ProjectEuler.jpr"/></hash>
    </list>
 </jws:workspace>
