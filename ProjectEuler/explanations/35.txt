@@ -1,0 +1,50 @@
+/==========\
+|Problem 35|
+\==========/
+
+The number, 197, is called a circular prime because all rotations of the digits: 197, 971, and 719, are themselves prime.
+
+There are thirteen such primes below 100: 2, 3, 5, 7, 11, 13, 17, 31, 37, 71, 73, 79, and 97.
+
+How many circular primes are there below one million?
+
+/===========\
+|Explanation|
+\===========/
+
+We can use our exisiting program to find all primes up until 1 million.
+
+To that end, we can tweak the existing code. Instead of filling up a list in sorted order,
+we can instead use a TreeSet (pre-sorted) and simply check each entry for its rotations.
+
+We do this by checking every prime number individually and querying the TreeSet for its rotations.
+The prime is transformed by adding its trailing digit to the front and then deleting the original.
+The transformed number is then checked to see if it's contained.
+This occurs for as many times as there are digits in the original, untransformed prime.
+
+There are 55 such circular primes below 1,000,000.
+
+* Here is an explanation that I initially wrote to projecteuler.net
+
+Very fun problem.
+
+Used an ArrayList to help with generating all the prime numbers.
+ArrayList lookup is O(1) so there's no problem using it here.
+
+After all primes are generated, I used a TreeSet constructed with the Collection in ArrayList.
+I'm using Search in the TreeSet and it's O(log n).
+PLUS it's pre-sorted from the creation of the primes so no time lost in the construction of the new object.
+
+Checking for [2,4,5,6,8,0] anywhere in a number takes too long and isn't worth it,
+since int's are not stored with respect to their base-10 digitization.
+The fastest method would involve converting the number to a char Array and performing a search.
+It's faster to just immediately check every prime number's rotations to see if they are prime.
+The issue here is that performing up to 6 checks on every digit is, on average,
+worse than performing a single 10-12 step check for the rotation in the TreeSet.
+6-digit prime numbers that have each digit checked for [2,4,5,6,8,0] will perform 36 wasteful actions checking the number!
+Better to just quickly check the Set.
+
+My code runs in 127 ms.
+If I used the TreeSet instead of the ArrayList for the collection of the primes,
+I theretically could've saved a few more ms not creating the second data structure.
+But oh well.

@@ -34,4 +34,4 @@ We can also multiply the triplets of a,b,c by natural numbers to generate more P
 By combing throgh all of these generated triples, we can find a set that satisfies the conditions of the problem.
 Then we can solve for abc.
 
-abc is 31875000.
+abc is 31875000.

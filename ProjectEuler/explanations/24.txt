@@ -1,0 +1,31 @@
+/==========\
+|Problem 24|
+\==========/
+
+A permutation is an ordered arrangement of objects.
+For example, 3124 is one possible permutation of the digits 1, 2, 3 and 4.
+If all of the permutations are listed numerically or alphabetically, we call it lexicographic order.
+The lexicographic permutations of 0, 1 and 2 are:
+
+012   021   102   120   201   210
+
+What is the millionth lexicographic permutation of the digits 0, 1, 2, 3, 4, 5, 6, 7, 8 and 9?
+
+/===========\
+|Explanation|
+\===========/
+
+For this problem, we can take advantage of the fact that any permutation of characters or numbers is divisible by every number below the number of objects in the permutation.
+This means that 10!, the number of permutations for the numbers 0, 1, 2, 3, 4, 5, 6, 7, 8 and 9 is divisible into 10 evenly sized subsets.
+We can use the starts and ends of these permutations of numbers to delineate the starts and ends of different subsets of answers.
+Each of these subsets is characterized by a different starting digit.
+
+Once we determine which subset our answer is in lexicographically (since each delineation occurs based on the permutation's rank lexicogrphically),
+We can zoom into that subset and repeat the process.
+The number of the section we are selecting helps us decide which character to use from the remaining unused numbers.
+
+Our 1,000,000th ranked lexicogrpahic string is also the x'th ranked string after we begin searching in this new subset.
+In the new subset, there are 9 equal division that we can search through, each marked by the start of a different yet unused number.
+We can repeat this process until there are no numbers remaining.
+
+The answer is 2783915460.

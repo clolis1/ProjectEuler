@@ -6,8 +6,11 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.FileReader;
 
+import projecteuler.problems.Problem;
+
 public class Driver
 {
+    @SuppressWarnings("oracle.jdeveloper.java.nested-assignment")
     public static void main(String[] args) throws IOException
     {
         System.out.println("Hello! This program executes various algorithms to solve certain problems from ProjectEuler.net.");
@@ -72,7 +75,9 @@ public class Driver
             
             if (valid_num && !explain_please) { // Execute the appropriate program, if it exists
                 final long startTime = System.currentTimeMillis();
-                pSet.get(Integer.parseInt(problem_number)).execute();
+                Problem temp = pSet.get(Integer.parseInt(problem_number));
+                if (temp == null) continue;
+                temp.execute();
                 final long endTime = System.currentTimeMillis();
                 
                 double totalTime = (double)(endTime - startTime);
@@ -82,6 +87,7 @@ public class Driver
                 }
                 else{ // Print execution diration
                     System.out.println("Total execution time: " + totalTime + " seconds");
+                    System.out.println("\nPlease input a number: ");
                 }
             }
             else if (valid_num && explain_please) { // Display the appropriate explanation, if it exists
@@ -92,6 +98,7 @@ public class Driver
                 while ((line = br.readLine()) != null) {
                     System.out.println(line);
                 }
+                System.out.println("\nPlease input a number: ");
             }
             else { // input wasn't valid. An appropriate error message *should* have been displayed already
                 // Mario, it that really you?

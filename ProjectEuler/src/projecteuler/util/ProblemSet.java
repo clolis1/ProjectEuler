@@ -32,6 +32,23 @@ public class ProblemSet {
         probs.add(new P19());
         probs.add(new P20());
         probs.add(new P21());
+        probs.add(new P22());
+        probs.add(new P23());
+        probs.add(new P24());
+        probs.add(new P25());
+        probs.add(new P26());
+        probs.add(new P27());
+        probs.add(new P28());
+        probs.add(new P29());
+        probs.add(new P30());
+        probs.add(new P31());
+        probs.add(new P32());
+        probs.add(new P33());
+        probs.add(new P34());
+        probs.add(new P35());
+        probs.add(new P36());
+        probs.add(new P37());
+        probs.add(new P38());
     }
     
     // Returns the associated Problem from the array
@@ -40,8 +57,8 @@ public class ProblemSet {
             return probs.get(x-1);
         }
         catch (IndexOutOfBoundsException e){
-            System.exit(7);
-            return new P1();
+            System.out.println("That number problem hasn't been solved yet! Please enter another number.");
+            return null;
         }
     }
 }

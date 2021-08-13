@@ -52,7 +52,7 @@ public class P9 implements Problem{
                 a += x;
                 b += y;
                 c += z;
-//                System.out.println(a + " + " + b + " + " + c + " = " + (a + b + c));
+                System.out.println(a + " + " + b + " + " + c + " = " + (a + b + c));
             }
             if ((a + b + c) == 1000) {
                 break;

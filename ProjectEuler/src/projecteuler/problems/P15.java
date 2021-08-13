@@ -24,9 +24,6 @@ public class P15 implements Problem{
         // Because calculating very large factorials will take too long, it is faster to generate the prime factors of all the numbers in the factorials.
         // Then, remove factors common to the numerator and the denominator and multiply out what remains of the denominator.
         
-//        ArrayList<Double> numerator_prime_factors = new ArrayList<Double>();
-//        ArrayList<Double> denominator_prime_factors = new ArrayList<Double>();
-        
         HashMap<Integer, Integer> numerator_prime_factors = new HashMap<Integer, Integer>();
         HashMap<Integer, Integer> denominator_prime_factors = new HashMap<Integer, Integer>();
         
@@ -36,27 +33,27 @@ public class P15 implements Problem{
             
             // add temp to numerator_prime_factors
             temp.forEach((key, val) -> {
-                numerator_prime_factors.computeIfPresent(key, (k, v) -> numerator_prime_factors.replace(key, v + val));
-                numerator_prime_factors.computeIfAbsent(key, k -> numerator_prime_factors.put(key, val));
+                numerator_prime_factors.computeIfPresent(key, (k, v) -> v + val);
+                numerator_prime_factors.computeIfAbsent(key, k -> val);
             });
             
             if (i <= GRID_LENGTH) {
                 temp.forEach((key, val) -> {
-                    denominator_prime_factors.computeIfPresent(key, (k, v) -> numerator_prime_factors.replace(key, v + val));
-                    denominator_prime_factors.computeIfAbsent(key, k -> numerator_prime_factors.put(key, val));
+                    denominator_prime_factors.computeIfPresent(key, (k, v) -> v + val);
+                    denominator_prime_factors.computeIfAbsent(key, k -> val);
                 });
             }
             if (i <= GRID_WIDTH) {
                 temp.forEach((key, val) -> {
-                    denominator_prime_factors.computeIfPresent(key, (k, v) -> numerator_prime_factors.replace(key, v + val));
-                    denominator_prime_factors.computeIfAbsent(key, k -> numerator_prime_factors.put(key, val));
+                    denominator_prime_factors.computeIfPresent(key, (k, v) -> v + val);
+                    denominator_prime_factors.computeIfAbsent(key, k -> val);
                 });
             }
         }
         
         // "Simplify" the equation by removing like factors.
         denominator_prime_factors.forEach((key, val) -> {
-                numerator_prime_factors.compute(key, (k, v) -> numerator_prime_factors.replace(key, v - val));
+                numerator_prime_factors.compute(key, (k, v) -> v - val);
         });
         
         // Multiply out the numerator

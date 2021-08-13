@@ -1,0 +1,32 @@
+/==========\
+|Problem 23|
+\==========/
+
+A perfect number is a number for which the sum of its proper divisors is exactly equal to the number.
+For example, the sum of the proper divisors of 28 would be 1 + 2 + 4 + 7 + 14 = 28, which means that 28 is a perfect number.
+
+A number n is called deficient if the sum of its proper divisors is less than n and it is called abundant if this sum exceeds n.
+
+As 12 is the smallest abundant number, 1 + 2 + 3 + 4 + 6 = 16,
+the smallest number that can be written as the sum of two abundant numbers is 24. By mathematical analysis,
+it can be shown that all integers greater than 28123 can be written as the sum of two abundant numbers.
+However, this upper limit cannot be reduced any further by analysis even though
+it is known that the greatest number that cannot be expressed as the sum of two abundant numbers is less than this limit.
+
+Find the sum of all the positive integers which cannot be written as the sum of two abundant numbers.
+
+/===========\
+|Explanation|
+\===========/
+
+For this problem, I began by ascertaining the sums of the proper divisors of all numbers less than the given limit of 28123.
+Then, I determined that all even numbers greater than 46, as well as the even numbers 24, 30, 32, 36, 38, 40, 42, and 44
+were the sums of two abundant numbers.
+
+This allows me to focus on finding odd numbers which are also the sums of two abundant numbers.
+We can do this by determing which number are abundant (by using the test which earlier determined the sums of numbers' proper divisors.
+We then add the full list of abundant numbers to each odd abundant number in our list, marking which numbers become sums.
+
+Finally, we tally up the array of numbers once all of our marks are set.
+
+We get 4179871.

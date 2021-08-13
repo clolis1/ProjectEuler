@@ -1,0 +1,37 @@
+/==========\
+|Problem 38|
+\==========/
+
+Take the number 192 and multiply it by each of 1, 2, and 3:
+
+192 × 1 = 192
+192 × 2 = 384
+192 × 3 = 576
+By concatenating each product we get the 1 to 9 pandigital, 192384576.
+We will call 192384576 the concatenated product of 192 and (1,2,3)
+
+The same can be achieved by starting with 9 and multiplying by 1, 2, 3, 4, and 5,
+giving the pandigital, 918273645, which is the concatenated product of 9 and (1,2,3,4,5).
+
+What is the largest 1 to 9 pandigital 9-digit number that can be formed as
+the concatenated product of an integer with (1,2, ... , n) where n > 1?
+
+/===========\
+|Explanation|
+\===========/
+
+A big help for this problem is that the set of numbers we are multiplying our number by always starts with 1.
+Thus, the ranges of numbers we must test always start and end with a power of ten.
+The ranges end when we result with a new product whose value takes us over 9 total digits.
+
+There are 4 cases where a 9-digit pandigital number can be formed with the concatenations:
+
+One 1-digit number and four 2-digit numbers
+Three 2-digit numbers and one 3-digit number
+Three 3-digit numbers
+One 4-digit number and one 5-digit number
+
+Each of these cases has parameters on what a number can be to fit these ranges while multiplying into (1, 2, ... , n)
+These ranges for the bounds for our loops.
+
+The largest pandgitial number is 932718654.

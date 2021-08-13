@@ -4,7 +4,9 @@ import java.math.BigInteger;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.TreeSet;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -60,6 +62,70 @@ public class ComplexMath {
         return primes;
     }
     
+    // Returns an ArrayList<Integer> containing prime numbers less than the given value
+    public static TreeSet<Integer> getSetPrimesUpUntil (int n) {
+        TreeSet<Integer> primes = new TreeSet<Integer>();
+        primes.add(2);
+        primes.add(3);
+        
+        int counter = 5; // We'll start at 5
+        while (counter < n) {
+            boolean prime = true;
+            int sqrt_max = (int) Math.sqrt((double) counter); // Check for divisibility up to the square root
+            Iterator<Integer> it = primes.iterator();
+            int x = 0;
+            while (it.hasNext() && x <= sqrt_max) {
+                x = it.next();
+                if (counter % x == 0) {
+                    prime = false;
+                    break;
+                }
+            }
+            
+            if (prime) { // number is prime
+                primes.add(counter);
+            }
+            counter += 2; // Check next number
+        }
+        return primes;
+    }
+    
+    // Checks if a number is prime
+    // Code from https://www.geeksforgeeks.org/java-program-to-check-if-a-number-is-prime-or-not/
+    public static boolean isPrime(int n)
+    {
+        // Corner cases
+        if (n <= 1) return false;
+        if (n <= 3) return true;
+  
+        // This is checked so that we can skip middle five numbers in below loop
+        if (n % 2 == 0 || n % 3 == 0) return false;
+  
+        for (int i = 5; i * i <= n; i = i + 6) {
+            if (n % i == 0 || n % (i + 2) == 0) return false;
+        }
+        
+        return true;
+    }
+    
+    // Checks if a number is prime (takes a double)
+    // Code from https://www.geeksforgeeks.org/java-program-to-check-if-a-number-is-prime-or-not/
+    public static boolean isPrime(double n)
+    {
+        // Corner cases
+        if (n <= 1) return false;
+        if (n <= 3) return true;
+    
+        // This is checked so that we can skip middle five numbers in below loop
+        if (n % 2 == 0 || n % 3 == 0) return false;
+    
+        for (int i = 5; i * i <= n; i = i + 6) {
+            if (n % i == 0 || n % (i + 2) == 0) return false;
+        }
+        
+        return true;
+    }
+    
     // Returns the amount of prime factors in d
     public static int numPrimeFactors (double d) {
         int num_prime_factors = 0;
@@ -109,22 +175,21 @@ public class ComplexMath {
         if (n % 2 == 0) pFactors.put(2, 0);
         while (n % 2 == 0) {
             n /= 2;
-            pFactors.replace(2, pFactors.get(2) + 1); // Increase multiplicity by one.
+            pFactors.compute(2, (key, val) -> val + 1); // Increase multiplicity by one.
         }
         
         if (n % 3 == 0) pFactors.put(3, 0);
         while (n % 3 == 0) {
             n /= 3;
-            pFactors.replace(3, pFactors.get(3) + 1); // Increase multiplicity by one.
+            pFactors.compute(3, (key, val) -> val + 1); // Increase multiplicity by one.
         }
         
         double square_root = Math.floor(Math.sqrt(n));
         double temp = n;
-        
-        for (int i = 5; i <= square_root; i++) {
+        for (int i = 5; i <= square_root; i += 2) {
             if (temp % i == 0) pFactors.put(i, 0); // add i to list of prime factors
             while (temp % i == 0) {
-                pFactors.replace(i, pFactors.get(i) + 1); // Increase multiplicity by one
+                pFactors.compute(i, (key, val) -> val + 1); // Increase multiplicity by one
                 temp /= i; // temp is divided by one of its prime factors.
                 square_root = Math.floor(Math.sqrt(temp)); // New square root value to save time.
             }
@@ -166,7 +231,7 @@ public class ComplexMath {
         for (long i = 5; i <= square_root; i++) {
             if (temp % i == 0) pFactors.put(i, 0L); // add i to list of prime factors
             while (temp % i == 0) {
-                pFactors.replace(i, pFactors.get(i) + 1); // Increase multiplicity by one
+                pFactors.compute(i, (key, val) -> val + 1); // Increase multiplicity by one
                 temp /= i; // temp is divided by one of its prime factors.
                 square_root = Math.floor(Math.sqrt(temp)); // New square root value to save time.
             }
@@ -194,11 +259,12 @@ public class ComplexMath {
     public static boolean isRelativelyPrime(int x, int y) {
         HashMap<Integer, Integer> xFactors = ComplexMath.getPrimeFactors(x);
         HashMap<Integer, Integer> yFactors = ComplexMath.getPrimeFactors(y);
-        
-        AtomicReference<Boolean> relPrime = new AtomicReference<Boolean>(false);
-        xFactors.forEach((key, val) -> {if (yFactors.containsKey(key)) relPrime.set(true);});
- 
-        return relPrime.get();
+        boolean relPrime = true;
+        Iterator<Integer> it = xFactors.keySet().iterator();
+        while (it.hasNext()) {
+            if (yFactors.containsKey(it.next())) {relPrime = false; break;}
+        }                                                       
+        return relPrime;
     }
     
     // Returns true if the given number is a palindrome
@@ -218,6 +284,52 @@ public class ComplexMath {
             }
         }
         return true;
+    }
+    
+    // Returns true if the given String is a palindrome
+    public static boolean isPalindrome (String str) {
+        int forwards = 0;
+        int backwards = str.length() - 1;
+        
+        while (forwards < str.length()) {
+            if (str.charAt(forwards) != str.charAt(backwards)) {
+                return false;
+            }
+            else {
+                forwards++;
+                backwards--;
+            }
+        }
+        return true;
+    }
+    
+    // Returns true if the given number is pandigital
+    public static boolean is1To9Pandigital(int x) {
+        String str = "" + x;
+        if (str.contains("1") &&
+            str.contains("2") &&
+            str.contains("3") &&
+            str.contains("4") &&
+            str.contains("5") &&
+            str.contains("6") &&
+            str.contains("7") &&
+            str.contains("8") &&
+            str.contains("9")    ) return true;
+        return false;
+    }
+    
+    // Returns true if the given number is pandigital
+    public static boolean is1To9Pandigital(String str) {
+        if (str.contains("1") &&
+            str.contains("2") &&
+            str.contains("3") &&
+            str.contains("4") &&
+            str.contains("5") &&
+            str.contains("6") &&
+            str.contains("7") &&
+            str.contains("8") &&
+            str.contains("9")    ) return true;
+        return false;
     }
     
     // Returns true if the given number is a square number
@@ -241,23 +353,50 @@ public class ComplexMath {
         if (ComplexMath.isSquare(d) && d != 0) {
             divisors.remove(divisors.size() - 1);
         }
-
-/**
-        HashMap<Integer, Integer> temp = ComplexMath.getPrimeFactors(n);
-        
-        
-        
-        // Use list of prime factors to determine divisors.
-        
-
-       
-        for (int i = 1; i < temp.size() / 2; i++) {
-            temp.forEach((e) -> ;
-        }
-*/
         return divisors;
     }
-  
+    
+    public static ArrayList<Integer> getProperDivisors(int n) {
+        if (n == 0 || n == 1) return new ArrayList<Integer>();
+        double d = n;
+        ArrayList<Integer> divisors = new ArrayList<Integer>();
+        double square_root = Math.floor(Math.sqrt(d));
+        for (int i = 1; i <= square_root; i++) {
+            if (d % i == 0) {
+                divisors.add(i);
+                divisors.add((int) d / i);
+            }
+        }
+        if (ComplexMath.isSquare(d) && d != 0) {
+            divisors.remove(divisors.size() - 1);
+        }
+        divisors.remove(1); // remove the number itself as it is not a proper divisor.
+        return divisors;
+    }
+    
+    public static int getSumOfProperDivisors(int n) {
+        if (n == 0 || n == 1) return 0;
+        double d = n;
+        int sum = 0;
+        double square_root = Math.floor(Math.sqrt(d));
+        for (int i = 1; i <= square_root; i++) {
+            if (d % i == 0) {
+                sum += i;
+                sum += (int) d / i;
+            }
+        }
+        if (ComplexMath.isSquare(d) && d != 0) {
+            sum -= (int) Math.sqrt(d);
+        }
+        sum -= n; // Subtract the number itself as it is not a proper divisor.
+        return sum;
+    }
+    
+    public static int factorial(int n) {
+        if (n > 1) return n * factorial(n - 1);
+        else return 1;
+    }
+    
     public static BigInteger bigFactorial(int n) {
         if (n > 1) return (new BigInteger(Integer.toString(n))).multiply(bigFactorial(n-1));
         else return new BigInteger("1");

@@ -1,0 +1,54 @@
+/==========\
+|Problem 28|
+\==========/
+
+Starting with the number 1 and moving to the right in a clockwise direction a 5 by 5 spiral is formed as follows:
+
+	21 22 23 24 25
+	20  7  8  9 10
+	19  6  1  2 11
+	18  5  4  3 12
+	17 16 15 14 13
+
+It can be verified that the sum of the numbers on the diagonals is 101.
+
+What is the sum of the numbers on the diagonals in a 1001 by 1001 spiral formed in the same way?
+
+/===========\
+|Explanation|
+\===========/
+
+While this problem can indeed be solved via brute force, using counters to simulate the measurement of the edges of a grid,
+this problem can actually be solved fairly trivially with a mathematical formula.
+
+The value of each of the diagnols of any length n can be expressed via a summation.
+The four formulae for the diagnols are:
+(all summations start at 1 and end at i)
+
+	[sig] (4n^2 + 4n + 1)
+	[sig] (4n^2 + 1)
+	[sig] (4n^2 + 2n + 1)
+	[sig] (4n^2 - 2n + 1)
+
+These summations can be combined to produce:
+
+	1 + [sig] (16n^2 + 4n + 4)
+
+which can be altered to:
+
+	1 + [sig] 16n^2 + [sig] 4n + [sig] 4
+
+which can be simplified to:
+
+	1 + (8/3) * (2n^3 + 3n^2 + n) + 2 * (n^2 + n) + 4n
+	1 + (16/3)n^3 + 8n^2 + (8/3)n + 2n^2 + 2n + 4n
+	(16/3)n^3 + 10n^2 + (26/3)n + 1
+
+where n is the length of each diagonol.
+However, due to inconsistencies with floating points, it is better to write the expression as:
+
+	(16/3)n^3 + (30/3)n^2 + (26/3)n + 1
+	(8n^3 + 15n^2 + 13n) * 2 / 3 + 1
+
+In this case, the length of each diagonol is 500.
+The final sum is 669171001.

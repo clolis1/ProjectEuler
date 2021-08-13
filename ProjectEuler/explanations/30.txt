@@ -1,0 +1,38 @@
+/==========\
+|Problem 30|
+\==========/
+
+Surprisingly there are only three numbers that can be written as the sum of fourth powers of their digits:
+
+1634 = 1^4 + 6^4 + 3^4 + 4^4
+8208 = 8^4 + 2^4 + 0^4 + 8^4
+9474 = 9^4 + 4^4 + 7^4 + 4^4
+As 1 = 1^4 is not a sum it is not included.
+
+The sum of these numbers is 1634 + 8208 + 9474 = 19316.
+
+Find the sum of all the numbers that can be written as the sum of fifth powers of their digits.
+
+/===========\
+|Explanation|
+\===========/
+
+Initially, I tried to determine if there was a mathematical trick to finding these special numbers,
+but cursory research indicates that there is not.
+
+As a result, a brute force search is required.
+There is a choice between a search of consecutive numbers, or a search of combinations of addends.
+
+I chose to brute force search combinations of addends.
+(Although all addends are single-digit numbers to the fifth power, they are essentially just 10 static values).
+
+The lower limit for this problem can be any combination of any length.
+The upper limit is determined by how large the largest addend may be.
+
+In this case, 6 addends of 9^5 do not come close to their "spelled" version of 999999.
+Therefore, there is no point in checking combinations of numbers greater than 6.
+
+We will check every combination of numbers up to a length of 6.
+If their sum contains all of the necessary numbers (and any amount of zeroes), a match is found.
+
+The sum of these sums is 443839.
