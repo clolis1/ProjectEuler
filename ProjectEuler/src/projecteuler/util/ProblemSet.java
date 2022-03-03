@@ -49,6 +49,35 @@ public class ProblemSet {
         probs.add(new P36());
         probs.add(new P37());
         probs.add(new P38());
+        probs.add(new P39());
+        probs.add(new P40());
+        probs.add(new P41());
+        probs.add(new P42());
+        probs.add(new P43());
+        probs.add(new P44());
+        probs.add(new P45());
+        probs.add(new P46());
+        probs.add(new P47());
+        probs.add(new P48());
+        probs.add(new P49());
+        probs.add(new P50());
+        probs.add(new P51());
+        probs.add(new P52());
+        probs.add(new P53());
+        probs.add(new P54());
+        probs.add(new P55());
+        probs.add(new P56());
+        probs.add(new P57());
+        probs.add(new P58());
+        probs.add(new P59());
+        probs.add(new P60());
+        probs.add(new P61());
+        probs.add(new P62());
+        probs.add(new P63());
+        probs.add(new P64());
+        probs.add(new P65());
+        probs.add(new P66());
+        probs.add(new P67());
     }
     
     // Returns the associated Problem from the array

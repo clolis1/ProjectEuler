@@ -12,6 +12,7 @@ import java.util.concurrent.atomic.AtomicReference;
 
 
 public class ComplexMath {
+    
     public ComplexMath() {
         super();
     }
@@ -48,7 +49,7 @@ public class ComplexMath {
             boolean prime = true;
             int sqrt_max = (int) Math.sqrt((double) counter); // Check for divisibility up to the square root
             for (int i = 0; primes.get(i) <= sqrt_max; i++) { 
-                if (counter % primes.get(i) == 0) {// number is not prime
+                if (counter % primes.get(i) == 0) { // number is not prime
                     prime = false;
                     break;
                 }
@@ -62,7 +63,7 @@ public class ComplexMath {
         return primes;
     }
     
-    // Returns an ArrayList<Integer> containing prime numbers less than the given value
+    // Returns a TreeSet<Integer> containing prime numbers less than the given value
     public static TreeSet<Integer> getSetPrimesUpUntil (int n) {
         TreeSet<Integer> primes = new TreeSet<Integer>();
         primes.add(2);
@@ -108,6 +109,22 @@ public class ComplexMath {
         return true;
     }
     
+    public static boolean isPrime(long n)
+    {
+        // Corner cases
+        if (n <= 1) return false;
+        if (n <= 3) return true;
+    
+        // This is checked so that we can skip middle five numbers in below loop
+        if (n % 2 == 0 || n % 3 == 0) return false;
+    
+        for (int i = 5; i * i <= n; i = i + 6) {
+            if (n % i == 0 || n % (i + 2) == 0) return false;
+        }
+        
+        return true;
+    }
+    
     // Checks if a number is prime (takes a double)
     // Code from https://www.geeksforgeeks.org/java-program-to-check-if-a-number-is-prime-or-not/
     public static boolean isPrime(double n)
@@ -121,6 +138,26 @@ public class ComplexMath {
     
         for (int i = 5; i * i <= n; i = i + 6) {
             if (n % i == 0 || n % (i + 2) == 0) return false;
+        }
+        
+        return true;
+    }
+    
+    // Checks if a number is prime (takes a BigInteger)
+    // Code from https://www.geeksforgeeks.org/java-program-to-check-if-a-number-is-prime-or-not/
+    public static boolean isPrime(BigInteger b)
+    {
+        // Corner cases
+        if (b.compareTo(BigInteger.ONE) <= 0) return false;
+        if (b.compareTo(new BigInteger("3")) <= 0) return true;
+    
+        // This is checked so that we can skip middle five numbers in below loop
+        if (b.mod(new BigInteger("2")).compareTo(BigInteger.ZERO) == 0 || 
+            b.mod(new BigInteger("3")).compareTo(BigInteger.ZERO) == 0) return false;
+    
+        for (BigInteger i = new BigInteger("5"); i.pow(2).compareTo(b) <= 0; i = i.add(new BigInteger("6"))) {
+            if (b.mod(i).compareTo(BigInteger.ZERO) == 0 ||
+                b.mod(i.add(new BigInteger("2"))).compareTo(BigInteger.ZERO) == 0) return false;
         }
         
         return true;
@@ -216,13 +253,13 @@ public class ComplexMath {
         if (n % 2 == 0) pFactors.put(2L, 0L);
         while (n % 2 == 0) {
             n /= 2;
-            pFactors.replace(2L, pFactors.get(2) + 1); // Increase multiplicity by one.
+            pFactors.replace(2L, pFactors.get(2L) + 1); // Increase multiplicity by one.
         }
         
         if (n % 3 == 0) pFactors.put(3L, 0L);
         while (n % 3 == 0) {
             n /= 3;
-            pFactors.replace(3L, pFactors.get(3) + 1); // Increase multiplicity by one.
+            pFactors.replace(3L, pFactors.get(3L) + 1); // Increase multiplicity by one.
         }
         
         double square_root = Math.floor(Math.sqrt(n));
@@ -330,6 +367,15 @@ public class ComplexMath {
             str.contains("8") &&
             str.contains("9")    ) return true;
         return false;
+    }
+    
+    // Returns true if the given number x is pandigital up to n
+    public static boolean isNPandigital(int x, int n) {
+        String str = "" + x;
+        for (int i = 1; i <= n; i++) {
+            if (!str.contains(Integer.toString(i))) return false;
+        }
+        return true;
     }
     
     // Returns true if the given number is a square number

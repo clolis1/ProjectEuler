@@ -91,6 +91,11 @@ public class Driver
                 }
             }
             else if (valid_num && explain_please) { // Display the appropriate explanation, if it exists
+                if (Integer.parseInt(problem_number) > 38) {
+                    System.out.println("Sorry, no explanations beyond this point!");
+                    System.out.println("\nPlease input a number: ");
+                    continue;
+                }
                 String explanation = "explanations/" + problem_number + ".txt";
                 br = new BufferedReader(new FileReader(explanation));
                 String line = null;
