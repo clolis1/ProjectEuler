@@ -447,4 +447,60 @@ public class ComplexMath {
         if (n > 1) return (new BigInteger(Integer.toString(n))).multiply(bigFactorial(n-1));
         else return new BigInteger("1");
     }
+    
+    // From https://www.algotree.org/algorithms/numeric/euler_totient/
+    public static int eulersTotient (int N) { 
+            // Setting initial number of totatives to N
+            int ans = N;
+            for (int i=2; i*i <= N; i++) {
+                if (N % i == 0) { 
+                    ans = ans - ans/i;
+                }
+                while (N % i == 0)
+                    N = N/i;
+            }
+
+            if (N > 1)
+                ans = ans - ans/N;
+        
+            return ans;
+        } 
+    
+    // Gives the decimal represenation of the given integer's square root to y decimal places. Trailing zeroes are removed sometimes.
+    // Does not round
+    public static String decimalRepOfSquareRoot(int x_int, int y) {
+        BigInteger i = BigInteger.ONE, r, x = new BigInteger(Integer.toString(x_int)), h = BigInteger.TEN.multiply(BigInteger.TEN);
+        String decimal = "";
+        
+        while ((i.add(BigInteger.ONE)).multiply(i.add(BigInteger.ONE)).compareTo(x) <= 0) i = i.add(BigInteger.ONE);
+        r = x.subtract(i.multiply(i));
+        decimal = i.toString();
+        i = i.add(i);
+            
+        for (int j = 0; j < y - 1; j++) {
+            BigInteger n = i.multiply(BigInteger.TEN), m = BigInteger.ZERO;
+            while (n.add(m).add(BigInteger.ONE).multiply(m.add(BigInteger.ONE)).compareTo(r.multiply(h)) < 0) m = m.add(BigInteger.ONE);
+            decimal += m.toString();
+            r = r.multiply(h).subtract((n.add(m).multiply(m)));
+            i = n.add(m.add(m));
+        }
+        
+        // For rounding
+/**        
+        if (Character.getNumericValue(decimal.charAt(decimal.length() - 1)) >= 5) {
+            decimal = decimal.substring(0, decimal.length() - 1);
+            while (decimal.charAt(decimal.length() - 1) == 9) decimal = decimal.substring(0, decimal.length() - 1);
+            decimal = decimal.substring(0, decimal.length() - 1) + (Character.getNumericValue(decimal.charAt(decimal.length() - 1)) + 1);
+        }
+        else decimal = decimal.substring(0, decimal.length() - 1);
+*/        
+        return decimal;
+    }
+    
+    // Method for finding the sum of a series of consecutive numbers
+    public static int sumOfConsecutiveNumbers(int first, int last) {
+        double x = first, y = last, n = first - last;
+        
+        return (int) (n / 2 * (x + y));
+    }
 }

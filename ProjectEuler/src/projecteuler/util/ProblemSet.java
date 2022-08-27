@@ -78,6 +78,24 @@ public class ProblemSet {
         probs.add(new P65());
         probs.add(new P66());
         probs.add(new P67());
+        probs.add(new P68());
+        probs.add(new P69());
+        probs.add(new P70());
+        probs.add(new P71());
+        probs.add(new P72());
+        probs.add(new P73());
+        probs.add(new P74());
+        probs.add(new P75());
+        probs.add(new P76());
+        probs.add(new P77());
+        probs.add(new P78());
+        probs.add(new P79());
+        probs.add(new P80());
+        probs.add(new P80()); // Placeholder
+        probs.add(new P80()); // Placeholder
+        probs.add(new P80()); // Placeholder
+        probs.add(new P80()); // Placeholder
+        probs.add(new P85());
     }
     
     // Returns the associated Problem from the array

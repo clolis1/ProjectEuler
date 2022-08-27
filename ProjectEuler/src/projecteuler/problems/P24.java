@@ -30,10 +30,7 @@ public class P24 implements Problem {
         for (int i = nums.length(); i > 0; i--) {
             int subset_size = num_permutations / i;
             int counter = 0;
-            for (int j = 1; subset_size * j < marker; j++) {
-                counter++;
-            }
-            System.out.println(counter * subset_size + " " + marker + " " + num_permutations);
+            for (int j = 1; subset_size * j < marker; j++) counter++;
             millionth_permutation = millionth_permutation.concat(nums.substring(counter, counter + 1));
             nums = nums.substring(0, counter) + nums.substring(counter + 1);
             num_permutations /= i;
