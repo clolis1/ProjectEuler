@@ -91,8 +91,8 @@ public class ProblemSet {
         probs.add(new P78());
         probs.add(new P79());
         probs.add(new P80());
-        probs.add(new P80()); // Placeholder
-        probs.add(new P80()); // Placeholder
+        probs.add(new P81());
+        probs.add(new P82());
         probs.add(new P80()); // Placeholder
         probs.add(new P80()); // Placeholder
         probs.add(new P85());

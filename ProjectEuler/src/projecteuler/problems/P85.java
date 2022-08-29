@@ -9,6 +9,7 @@ public class P85 implements Problem {
     }
     
     @Override
+    @SuppressWarnings("org.adfemg.audits.java.system-out-usage")
     public void execute() {
         System.out.println("By counting carefully it can be seen that\n" +
         "a rectangular grid measuring 3 by 2 contains eighteen rectangles:\n" +
