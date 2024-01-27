@@ -23,7 +23,7 @@ public class Driver
         boolean running = true;
         
         ProblemSet pSet = new ProblemSet();
-        
+
         while (running) {
             // Receive input from user.
             BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
