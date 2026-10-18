@@ -21,7 +21,7 @@ someone who has never seen the problem can follow the idea, and someone who has 
 
 1. **Read the solution** and any helpers it uses — for Java, `src/main/java/projecteuler/util/`
    (`Primes`, `Divisors`, `Digits`, `Arithmetic`, `Lexography`, `BinaryTree`, `Resources`); for Python,
-   the standard library and `sympy`. Explain what the code *actually* does, not an idealized version.
+   `python/euler/lib.py`, the standard library, numpy and `sympy`. Explain what the code *actually* does, not an idealized version.
 2. **Verify the answer** (commands run from the repo root):
    - Python: `.venv/Scripts/python -m euler N` prints the answer and how long `solve()` took;
      `.venv/Scripts/python -m pytest python` checks it.

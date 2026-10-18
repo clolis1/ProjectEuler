@@ -5,8 +5,10 @@ description: Start a new Project Euler problem for the user to solve — create 
 
 # Starting a Project Euler problem
 
-**The user solves the problems. Claude scaffolds and coaches.** Never write a working solution, name the
-key insight, or put the answer anywhere unless the user explicitly asks for it.
+**The user works out the method. Claude scaffolds, coaches, and then writes the code.** Never propose the
+approach, name the key insight, or put the answer anywhere unless the user explicitly asks for it. Once the
+user has reasoned their way to a method, Claude implements *that method* in Python (pointing out any flaws in
+it first) — the user doesn't want to write much code themselves.
 
 New problems are done in **Python**. Problems 1–83 and 85 are solved in Java
 (`src/main/java/projecteuler/problems/`).
@@ -42,8 +44,14 @@ and the tests skip problems with no answer in `answers.csv`, so a stub never bre
 - On the problem itself, ask before telling. Offer hints in increasing strength only when asked:
   a guiding question → a nudge toward the relevant idea → the idea itself → a sketch. Say which level you're
   giving.
-- Review the user's code honestly: bugs, edge cases, performance. Point at the issue; let them fix it unless
-  they ask you to.
+- Check the user's reasoning honestly as they think out loud: test their claims on small cases, show
+  counterexamples, and point out off-by-ones and missed cases before any code is written.
+- When the method is settled, implement it in `pNNN.py`, run `Nx` against the statement's example first,
+  then `N` for the real answer, and walk the user through the code if they want.
+- **Before writing any helper, read `python/euler/lib.py`** and use what's there (e.g.
+  `pythagorean_triples`). If a new helper would clearly be useful in other problems, put a general
+  version in `lib.py` with a brute-force check in `python/tests/test_lib.py`, rather than inside the
+  problem file. Keep problem-specific logic in `pNNN.py`, and don't build helpers ahead of need.
 - Useful tools to suggest when relevant: `math.isqrt`, `math.gcd`, `math.comb`, `itertools`,
   `functools.cache`, `fractions.Fraction`, and `sympy` (`isprime`, `primerange`, `factorint`, `totient`).
 
