@@ -1,0 +1,64 @@
+package projecteuler.problems;
+
+import java.util.ArrayList;
+
+import java.util.HashMap;
+
+import java.util.concurrent.atomic.AtomicLong;
+
+import projecteuler.util.Primes;
+
+public class P15 implements Problem{
+    public P15() {
+        super();
+    }
+    
+    public String solve() {
+        final int GRID_LENGTH = 20;
+        final int GRID_WIDTH = 20;
+        AtomicLong num_paths = new AtomicLong(1L);
+        
+        // Because calculating very large factorials will take too long, it is faster to generate the prime factors of all the numbers in the factorials.
+        // Then, remove factors common to the numerator and the denominator and multiply out what remains of the denominator.
+        
+        HashMap<Integer, Integer> numerator_prime_factors = new HashMap<Integer, Integer>();
+        HashMap<Integer, Integer> denominator_prime_factors = new HashMap<Integer, Integer>();
+        
+        // Populate arrays with prime factors from the factorials
+        for (int i = 1; i <= GRID_LENGTH + GRID_WIDTH; i++) {
+            HashMap<Integer, Integer> temp = Primes.getPrimeFactors(i);
+            
+            // add temp to numerator_prime_factors
+            temp.forEach((key, val) -> {
+                numerator_prime_factors.computeIfPresent(key, (k, v) -> v + val);
+                numerator_prime_factors.computeIfAbsent(key, k -> val);
+            });
+            
+            if (i <= GRID_LENGTH) {
+                temp.forEach((key, val) -> {
+                    denominator_prime_factors.computeIfPresent(key, (k, v) -> v + val);
+                    denominator_prime_factors.computeIfAbsent(key, k -> val);
+                });
+            }
+            if (i <= GRID_WIDTH) {
+                temp.forEach((key, val) -> {
+                    denominator_prime_factors.computeIfPresent(key, (k, v) -> v + val);
+                    denominator_prime_factors.computeIfAbsent(key, k -> val);
+                });
+            }
+        }
+        
+        // "Simplify" the equation by removing like factors.
+        denominator_prime_factors.forEach((key, val) -> {
+                numerator_prime_factors.compute(key, (k, v) -> v - val);
+        });
+        
+        // Multiply out the numerator
+        
+        numerator_prime_factors.forEach((key, val) -> {
+                num_paths.set(num_paths.get() * (long) Math.pow(key, val));
+        });
+        
+        return String.valueOf(num_paths);
+    }
+}

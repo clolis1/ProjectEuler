@@ -1,0 +1,40 @@
+plugins {
+    id 'application'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation platform('org.junit:junit-bom:5.13.4')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
+
+application {
+    mainClass = 'projecteuler.Driver'
+}
+
+tasks.named('run') {
+    standardInput = System.in
+    workingDir = rootDir
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+    maxHeapSize = '2g'
+    testLogging {
+        events = ['failed', 'skipped']
+        exceptionFormat = 'full'
+    }
+}
