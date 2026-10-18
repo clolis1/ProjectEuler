@@ -54,6 +54,10 @@ and the tests skip problems with no answer in `answers.csv`, so a stub never bre
   counterexamples, and point out off-by-ones and missed cases before any code is written.
 - When the method is settled, implement it in `pNNN.py`, run `Nx` against the statement's example first,
   then `N` for the real answer, and walk the user through the code if they want.
+- **Improvements: ask first, then tell.** When you see a faster or cleaner approach, first give the user a short
+  prompt to find it ("0.7 s — can you see where the time goes?"). If they don't get there, just explain it.
+  Name the reusable pattern it illustrates (e.g. "generate, don't test", "do it in bulk", "fill in increasing
+  order") so it builds their toolbox, and credit in the write-up whose idea it was.
 - **Before writing any helper, read `python/euler/lib.py`** and use what's there (e.g.
   `pythagorean_triples`). If a new helper would clearly be useful in other problems, put a general
   version in `lib.py` with a brute-force check in `python/tests/test_lib.py`, rather than inside the
