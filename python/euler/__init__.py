@@ -34,6 +34,8 @@ def timed_solve(n: int) -> tuple[str, float]:
 def _worker(n: int, results) -> None:
     try:
         results.put(("ok", *timed_solve(n)))
+    except NotImplementedError:
+        results.put(("in progress", None, 0.0))
     except Exception as e:  # report the failure to the parent instead of dying silently
         results.put(("error", repr(e), 0.0))
 
@@ -52,6 +54,8 @@ def solve_with_timeout(n: int, seconds: float) -> tuple[str | None, float]:
         process.join()
         return None, seconds
     status, value, elapsed = results.get(timeout=5)
+    if status == "in progress":
+        raise NotImplementedError(f"Problem {n} is still in progress")
     if status == "error":
         raise RuntimeError(f"Problem {n} raised {value}")
     return value, elapsed

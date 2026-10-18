@@ -3,6 +3,7 @@ Command-line runner for the Python solutions.
 
     python -m euler 86      solve problem 86 and show the time taken
     python -m euler 86e     show the explanation for problem 86 (works for the Java problems too)
+    python -m euler 86x     run problem 86's example() — the statement's small worked case, if it has one
     python -m euler all     solve every Python problem and print a timing table
     python -m euler         interactive mode (same commands, Q to quit)
 """
@@ -17,10 +18,30 @@ TIME_LIMIT_SECONDS = 60
 
 def solve(n: int) -> None:
     if n not in problems.solved():
-        print(f"Problem {n} hasn't been solved in Python yet.")
+        print(f"Problem {n} hasn't been started in Python yet.")
         return
-    answer, seconds = timed_solve(n)
+    try:
+        answer, seconds = timed_solve(n)
+    except NotImplementedError:
+        print(f"Problem {n} is still in progress.")
+        return
     print(f"Problem {n}: {answer}  ({seconds:.3f} s)")
+
+
+def example(n: int) -> None:
+    if n not in problems.solved():
+        print(f"Problem {n} hasn't been started in Python yet.")
+        return
+    module = problems.module(n)
+    if not hasattr(module, "example"):
+        print(f"Problem {n} has no example() to check against.")
+        return
+    try:
+        result = module.example()
+    except NotImplementedError:
+        print(f"Problem {n} is still in progress.")
+        return
+    print(f"Problem {n} example: {result}")
 
 
 def explain(n: int) -> None:
@@ -35,7 +56,10 @@ def run_all() -> None:
     print(f"{'#':>5}  {'Answer':<20} {'Seconds':>9}")
     total = 0.0
     for n in problems.solved():
-        answer, seconds = solve_with_timeout(n, TIME_LIMIT_SECONDS)
+        try:
+            answer, seconds = solve_with_timeout(n, TIME_LIMIT_SECONDS)
+        except NotImplementedError:
+            answer, seconds = "(in progress)", 0.0
         if answer is None:
             answer = f"(gave up after {TIME_LIMIT_SECONDS} s)"
         total += seconds
@@ -47,13 +71,16 @@ def handle(command: str) -> None:
     if command.lower() == "all":
         run_all()
         return
-    match = re.fullmatch(r"(\d+)([eE]?)", command)
+    match = re.fullmatch(r"(\d+)([eExX]?)", command)
     if not match:
-        print("Enter a problem number, a number followed by 'e', 'all', or Q.")
+        print("Enter a problem number, a number followed by 'e' or 'x', 'all', or Q.")
         return
     n = int(match.group(1))
-    if match.group(2):
+    suffix = match.group(2).lower()
+    if suffix == "e":
         explain(n)
+    elif suffix == "x":
+        example(n)
     else:
         solve(n)
 
@@ -65,8 +92,8 @@ def main() -> None:
         return
 
     print(f"Project Euler (Python) — {len(problems.solved())} problems solved.")
-    print("Enter a number to solve it, a number followed by 'e' (e.g. 86e) for its explanation,")
-    print("'all' to run everything, or Q to quit.")
+    print("Enter a number to solve it, a number followed by 'e' (e.g. 86e) for its explanation")
+    print("or 'x' to run its worked example, 'all' to run everything, or Q to quit.")
     while True:
         try:
             line = input("\n> ").strip()

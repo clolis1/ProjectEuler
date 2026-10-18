@@ -18,7 +18,11 @@ def solved() -> list[int]:
     return sorted(numbers)
 
 
+def module(n: int):
+    """The module for problem n."""
+    return importlib.import_module(f"{__name__}.p{n:03d}")
+
+
 def solve(n: int) -> str:
     """Runs problem n's solve() and returns the answer as a string."""
-    module = importlib.import_module(f"{__name__}.p{n:03d}")
-    return str(module.solve())
+    return str(module(n).solve())
