@@ -35,9 +35,10 @@ def load_answers() -> dict[int, str]:
 
 
 def timed_solve(n: int) -> tuple[str, float]:
-    """Solves problem n in this process and returns (answer, seconds)."""
+    """Solves problem n in this process and returns (answer, seconds). Only solve() is timed, not importing it."""
     from euler import problems
 
+    problems.module(n)  # import first, so library start-up (numpy, sympy: about a second) isn't counted
     start = time.perf_counter()
     answer = problems.solve(n)
     return answer, time.perf_counter() - start
