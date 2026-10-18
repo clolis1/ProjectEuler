@@ -32,6 +32,23 @@ someone who has never seen the problem can follow the idea, and someone who has 
 3. **Write `explanations/N.md`** using the template below. If the file already exists, keep anything
    correct and fix anything wrong.
 
+## Finishing a problem we worked on together
+
+When the explanation follows a session where the user reasoned their way to the method (see `euler-start`):
+
+- **Tell their story, not a textbook's.** In Plain Terms and In Theory should follow the steps the user
+  actually took and use their framing and analogies where they had good ones. They're the author; write
+  in first person ("I noticed…").
+- **Keep the good corrections.** Mistakes they made and fixed along the way (an off-by-one, a missed case,
+  a wrong first guess) often make the best one-line warnings. Put them in In Theory where they explain a
+  rule, or in Further Thoughts.
+- **Replace every open question** from the `euler-start` draft. None should survive.
+- **Credit earlier versions.** If the solution was rewritten (e.g. a faster method), say what changed and
+  the before/after runtimes in Further Thoughts.
+- **The answer:** fill in the Answer line once the code's answer matches the statement's example. But add it
+  to `answers.csv` only after the user confirms projecteuler.net accepted it, and say in chat which it is.
+- Remove any `Status: in progress` line from the problem file's docstring.
+
 ## Template
 
 ```markdown
