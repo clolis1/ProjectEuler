@@ -11,7 +11,7 @@ Command-line runner for the Python solutions.
 import re
 import sys
 
-from euler import EXPLANATIONS, problems, solve_with_timeout, timed_solve
+from euler import explanation_path, problems, solve_with_timeout, timed_solve
 
 TIME_LIMIT_SECONDS = 60
 
@@ -45,7 +45,7 @@ def example(n: int) -> None:
 
 
 def explain(n: int) -> None:
-    path = EXPLANATIONS / f"{n}.md"
+    path = explanation_path(n)
     if not path.exists():
         print(f"No explanation for problem {n} yet.")
         return

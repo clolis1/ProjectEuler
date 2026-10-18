@@ -2,7 +2,7 @@
 
 import pytest
 
-from euler import EXPLANATIONS, load_answers, solve_with_timeout
+from euler import explanation_path, load_answers, solve_with_timeout
 from euler.problems import solved
 
 TIME_LIMIT_SECONDS = 60
@@ -24,4 +24,4 @@ def test_gives_the_known_answer(n):
 
 @pytest.mark.parametrize("n", solved())
 def test_has_an_explanation(n):
-    assert (EXPLANATIONS / f"{n}.md").exists(), f"explanations/{n}.md is missing"
+    assert explanation_path(n).exists(), f"{explanation_path(n)} is missing"

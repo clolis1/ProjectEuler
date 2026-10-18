@@ -1,11 +1,17 @@
 """
 One module per solved problem: pNNN.py (zero-padded, e.g. p086.py) with a solve() function that
-returns the answer and prints nothing.
+returns the answer and prints nothing. Problems above 100 live in 100plus/problems/ instead; adding
+that folder to this package's search path makes them importable as euler.problems.pNNN too.
 """
 
 import importlib
 import pkgutil
 import re
+
+from euler import PRIVATE
+
+if (PRIVATE / "problems").is_dir():
+    __path__.append(str(PRIVATE / "problems"))
 
 
 def solved() -> list[int]:

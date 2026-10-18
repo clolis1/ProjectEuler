@@ -13,13 +13,19 @@ it first) — the user doesn't want to write much code themselves.
 New problems are done in **Python**. Problems 1–83 and 85 are solved in Java
 (`src/main/java/projecteuler/problems/`).
 
+**Problems above 100 are private.** Their files go in the `100plus/` submodule (its own private GitHub repo),
+never in the public repo: `100plus/problems/pNNN.py`, `100plus/explanations/N.md` and `100plus/answers.csv`.
+The runner and tests find them automatically. To commit: commit inside `100plus/` and push it first, then
+commit the updated `100plus` pointer in the main repo. If `100plus/` is empty after a fresh clone, run
+`git submodule update --init`.
+
 ## 1. Scaffold
 
 0. If `.venv/` is missing, set it up from the repo root:
    `python -m venv .venv` then `.venv/Scripts/python -m pip install -e "python[dev]"`.
 1. **Get the statement** from `https://projecteuler.net/problem=N`. Input files go in
    `src/main/resources/data/` (shared with Java) and are read via `euler.DATA / "pNNN_name.txt"`.
-2. **Create `python/euler/problems/pNNN.py`** (zero-padded, e.g. `p084.py`):
+2. **Create `python/euler/problems/pNNN.py`** (zero-padded, e.g. `p084.py`; above 100, `100plus/problems/pNNN.py`):
    - A module docstring with the problem's number, title and link.
    - **Mechanical setup only**: transcribed data from the statement (lists, tables, constants), and the
      parameters the question asks about. Nothing that encodes the approach.
@@ -27,7 +33,7 @@ New problems are done in **Python**. Problems 1–83 and 85 are solved in Java
      question's actual parameters. `solve()` must **return** the answer and print nothing.
    - If the statement gives a smaller worked example (e.g. "with 6-sided dice the string is 102400"), add an
      `example()` the user can run to check their logic against it.
-3. **Create `explanations/N.md`** from the `euler-explanation` template:
+3. **Create `explanations/N.md`** (above 100, `100plus/explanations/N.md`) from the `euler-explanation` template:
    - Fill in the title, link and the full **Problem** section.
    - Set `**Answer:** —` and `**Runtime:** —`.
    - Under each other heading, write 2–4 **open questions** that help the user think it through, in the
@@ -57,7 +63,7 @@ and the tests skip problems with no answer in `answers.csv`, so a stub never bre
 
 ## 3. Finish
 
-1. When the user has an answer, they submit it on projecteuler.net. Add `N,answer` to `answers.csv` only
+1. When the user has an answer, they submit it on projecteuler.net. Add `N,answer` to `answers.csv` (above 100, `100plus/answers.csv`) only
    after they confirm it was accepted, then run `.venv/Scripts/python -m pytest python`.
 2. Help them finish `explanations/N.md` with the `euler-explanation` skill — in their words where possible;
    replace the open questions with the real sections.

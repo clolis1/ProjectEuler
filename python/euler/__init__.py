@@ -9,16 +9,28 @@ EXPLANATIONS = ROOT / "explanations"
 ANSWERS = ROOT / "answers.csv"
 DATA = ROOT / "src" / "main" / "resources" / "data"  # problem input files, shared with the Java solutions
 
+# Problems above 100 live in the private 100plus/ submodule (its own problems/, explanations/ and answers.csv),
+# because Project Euler asks that those solutions not be published. Everything works the same without it.
+PRIVATE = ROOT / "100plus"
+
+
+def explanation_path(n: int) -> Path:
+    """Where problem n's explanation lives: explanations/N.md, or 100plus/explanations/N.md above 100."""
+    return (PRIVATE / "explanations" if n > 100 else EXPLANATIONS) / f"{n}.md"
+
 
 def load_answers() -> dict[int, str]:
-    """Reads the shared answers.csv (problem,answer per line; # starts a comment)."""
+    """Reads answers.csv and 100plus/answers.csv (problem,answer per line; # starts a comment)."""
     answers = {}
-    for line in ANSWERS.read_text(encoding="utf-8").splitlines():
-        line = line.strip()
-        if not line or line.startswith("#"):
+    for path in (ANSWERS, PRIVATE / "answers.csv"):
+        if not path.exists():
             continue
-        n, answer = line.split(",", 1)
-        answers[int(n)] = answer.strip()
+        for line in path.read_text(encoding="utf-8").splitlines():
+            line = line.strip()
+            if not line or line.startswith("#"):
+                continue
+            n, answer = line.split(",", 1)
+            answers[int(n)] = answer.strip()
     return answers
 
 

@@ -13,6 +13,8 @@ Solutions live in one of two places:
 - **Python (problem 86 onward — the default for new work):** `python/euler/problems/pNNN.py`
   (zero-padded, e.g. `p086.py`) with a `solve()` that returns the answer and prints nothing.
 - **Java (problems 1–85):** `src/main/java/projecteuler/problems/PN.java` with `String solve()`.
+- **Above 100 (private):** everything lives in the `100plus/` submodule — `100plus/problems/pNNN.py`,
+  `100plus/explanations/N.md`, `100plus/answers.csv` — never in the public repo.
 
 Explanations are internal notes (shown by `python -m euler Ne` or `gradlew run --args="Ne"`), written so
 someone who has never seen the problem can follow the idea, and someone who has can check the reasoning.
