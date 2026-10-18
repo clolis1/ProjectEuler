@@ -1,4 +1,4 @@
-# problem,answer — verified-correct answers; problems missing here are skipped by AnswersTest
+# problem,answer — verified-correct answers, checked by AnswersTest (Java) and python/tests (Python)
 1,233168
 2,4613732
 3,6857

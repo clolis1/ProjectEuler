@@ -5,8 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertTimeoutPreemptively;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.time.Duration;
 import java.util.Map;
 import java.util.TreeMap;
@@ -31,10 +32,10 @@ class AnswersTest {
         }));
     }
 
+    /** answers.csv lives at the repository root, shared with the Python tests. Gradle runs tests from there. */
     private static Map<Integer, String> loadAnswers() throws IOException {
         Map<Integer, String> answers = new TreeMap<>();
-        try (BufferedReader in = new BufferedReader(new InputStreamReader(
-                AnswersTest.class.getResourceAsStream("/answers.csv"), StandardCharsets.UTF_8))) {
+        try (BufferedReader in = Files.newBufferedReader(Path.of("answers.csv"), StandardCharsets.UTF_8)) {
             String line;
             while ((line = in.readLine()) != null) {
                 line = line.trim();

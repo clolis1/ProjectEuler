@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "project-euler"
+version = "0.1.0"
+description = "Project Euler solutions in Python (problems 86 onward; 1-85 are in the Java project)."
+requires-python = ">=3.12"
+dependencies = ["sympy"]
+
+[project.optional-dependencies]
+dev = ["pytest"]
+
+[tool.setuptools]
+packages = ["euler", "euler.problems"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
