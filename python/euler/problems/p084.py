@@ -20,6 +20,8 @@ SQUARES = [
 ]
 at = SQUARES.index
 N, STREAKS, JAIL = len(SQUARES), 3, at("JAIL")
+RAILWAYS = [at("R1"), at("R2"), at("R3"), at("R4")]
+UTILITIES = [at("U1"), at("U2")]
 
 
 def solve() -> str:
@@ -67,11 +69,10 @@ def go_to_jail(M):
 
 def chance(M):
     for square in (at("CH1"), at("CH2"), at("CH3")):
-        def next_one(kind):  # the next railway or utility, clockwise
-            return next(s % N for s in range(square + 1, square + N) if SQUARES[s % N].startswith(kind))
-        cards = ["GO", "JAIL", "C1", "E3", "H2", "R1"]
-        destinations = [at(c) for c in cards] + [next_one("R"), next_one("R"), next_one("U"), (square - 3) % N]
-        redirect(M, square, [(1 / 16, d) for d in destinations])
+        next_r = next((r for r in RAILWAYS if r > square), RAILWAYS[0])  # past the last one, wrap around to R1
+        next_u = next((u for u in UTILITIES if u > square), UTILITIES[0])
+        cards = [at(c) for c in ("GO", "JAIL", "C1", "E3", "H2", "R1")] + [next_r, next_r, next_u, (square - 3) % N]
+        redirect(M, square, [(1 / 16, d) for d in cards])
 
 
 def community_chest(M):
